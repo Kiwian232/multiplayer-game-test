@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S0C4TR7NCJ"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-S0C4TR7NCJ');
+        </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Game (W.I.P.)</title>
+        <link rel="favicon" type="image/x-icon" href="/favicon.ico">
+        <script src="main.js" defer></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body style="background-color: lightgreen">
+        <canvas id="canvas" width="0" height="0" style="position: absolute; top: 0px; left: 0px; z-index: -1;"></canvas>
+        <div id="fullscreenMessage" style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; justify-content: center; align-items: center;"><div style="background-color: lightgrey; outline: 2px black dotted"><h1 id="fullscreenMessageText" style="padding: 20px;">Loading Game...</h1></div></div>
+        <div id="menuElements">
+            <input type="text" id="nameInput" placeholder="Please enter your discord username!!!" style="width: 230px;">
+            <button id="startButton">Start</button>
+            <br>
+            <button id="fullscreenButton">Mobile Players Click</button>
+            <button id="toggleMobileButton">Toggle Mobile</button>
+            <br>
+            <p id="info"><strong>READ THIS BEFORE PLAYING, <br> IT WILL BE UPDATED REGULARLY</strong><br><br> fyi having trouble detecting mobile players <br> so mobile controls may not show up on mobile <br> click "Toggle Mobile" button to show them <br><br> please chose a name with no spaces or special characters <br> (except for - and _) thats shorter than 15 characters <br><br><strong>LATEST VERSION v26</strong></p>
+            <p id="mobileIdentifier"></p>
+        </div>
+
+        <div id="gameElements" style="display: none;">
+            <input type="text" id="chatInput" placeholder="Chat here">
+            <button id="sendChatButton">Send</button>
+            <button id="leaveButton">Leave Game</button>
+        </div>
+
+        <div id="mobileControls" style="display: none;">
+            <div class="mobile-control" id="top"></div>
+            <div class="mobile-control" id="left"></div>
+            <div class="mobile-control" id="right"></div>
+            <div class="mobile-control" id="bottom"></div>
+            <div class="mobile-control" id="space"></div>
+        </div>
+    </body>
+</html>
