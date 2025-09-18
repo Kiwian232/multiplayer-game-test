@@ -354,7 +354,7 @@ function sendMessage(type, data) {
 
 function connectToServer() {
     document.getElementById('fullscreenMessage').style.display = 'flex';
-    socket = new WebSocket('https://kiwigameserver.onrender.com/');
+    socket = new WebSocket('https://kiwian-neocities-server.onrender.com/');
 
     socket.addEventListener('open', () => {
         console.log('Connected to the server');
@@ -450,6 +450,7 @@ function handlePacket(parsedMessage) {
             players = players.filter((player) => player.name !== parsedMessage.data.name);
         }
     } else if (parsedMessage.type === 'playerPosition') {
+        console.log("position packjet from " + (player => player.name == parsedMessage.data.name));
         const index = players.findIndex(player => player.name === parsedMessage.data.name);
         if (index === 0 || index === -1) {
             return;
@@ -472,6 +473,7 @@ function handlePacket(parsedMessage) {
             document.getElementById('nameInput').value = '';
             alert('Name is taken or invalid, please chose another.');
             connected = false;
+            gameStarted = false;
         } else {
             alert(`Unknown error: ${parsedMessage.data.text}`);
         }

@@ -174,15 +174,14 @@ wss.on("connection", (ws) => {
             );
         }
 
-        if (
-            parsedMessage.type === "playerPosition" ||
-            parsedMessage.type === "chat"
-        )
+        if (parsedMessage.type === "playerPosition" || parsedMessage.type === "chat") {
+            console.log("playerPosition packet from " + players.find((player) => players.ws == ws));
             wss.clients.forEach((client) => {
                 if (client.readyState === WebSocket.OPEN) {
                     client.send(message);
                 }
             });
+        }
 
         if (parsedMessage.type === "playerDisconnect") {
             const player = players.find((player) => player.ws === ws);
