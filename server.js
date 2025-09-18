@@ -154,7 +154,7 @@ wss.on("connection", (ws) => {
                 }
             });
 
-            const playerConnectChatmessage = {
+            const playerConnectChatMessage = {
                 type: "chat",
                 data: {
                     text: `${playerName} joined the game`,
@@ -217,7 +217,7 @@ wss.on("connection", (ws) => {
                 }
             });
 
-            const playerDisconnectChatmessage = {
+            const playerDisconnectChatMessage = {
                 type: "chat",
                 data: {
                     text: `${player.name} left the game`,
