@@ -157,7 +157,7 @@ wss.on("connection", (ws) => {
             const playerConnectChatmessage = {
                 type: "chat",
                 data: {
-                    text: `${player.name} joined the game`,
+                    text: `${playerName} joined the game`,
                     from: ""
                 }
             };
