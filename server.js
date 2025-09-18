@@ -154,6 +154,20 @@ wss.on("connection", (ws) => {
                 }
             });
 
+            const playerConnectChatmessage = {
+                type: "chat",
+                data: {
+                    text: `${player.name} joined the game`,
+                    from: ""
+                }
+            };
+
+            wss.clients.forEach((client) => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(playerConnectChatMessage);
+                }
+            });
+
             console.log(`${players.length} players connected`);
         } else {
             console.log(
@@ -200,6 +214,20 @@ wss.on("connection", (ws) => {
             wss.clients.forEach((client) => {
                 if (client !== ws && client.readyState === WebSocket.OPEN) {
                     client.send(JSON.stringify(playerDisconnectMessage));
+                }
+            });
+
+            const playerDisconnectChatmessage = {
+                type: "chat",
+                data: {
+                    text: `${player.name} left the game`,
+                    from: ""
+                }
+            };
+
+            wss.clients.forEach((client) => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(playerDisconnectChatMessage);
                 }
             });
 
