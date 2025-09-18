@@ -322,6 +322,7 @@ document.getElementById('leaveButton').addEventListener('click', () => {
         name: "NULL - Player name not set"
     }];
     connected = false;
+    gameStarted = false;
     console.log('Disconnected from game');
 });
 
@@ -450,7 +451,7 @@ function handlePacket(parsedMessage) {
             players = players.filter((player) => player.name !== parsedMessage.data.name);
         }
     } else if (parsedMessage.type === 'playerPosition') {
-        console.log("position packjet from " + (player => player.name == parsedMessage.data.name));
+        console.log("position packjet from " + (players[player => player.name == parsedMessage.data.name]));
         const index = players.findIndex(player => player.name === parsedMessage.data.name);
         if (index === 0 || index === -1) {
             return;
