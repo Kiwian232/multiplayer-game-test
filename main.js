@@ -429,11 +429,19 @@ function handlePacket(parsedMessage) {
             return;
         }
         players.push({
-            x: 200,
-            y: 200,
-            health: 100,
+            x: parsedMessage.data.x,
+            y: parsedMessage.data.y,
+            health: parsedMessage.data.health,
             name: parsedMessage.data.name
         })
+
+        chats.push(
+            {
+                text: parsedMessage.data.name + " joined the game",
+                from: "",
+                frames: frames
+            }
+        );
     } else if (parsedMessage.type === 'existingPlayers') {
         parsedMessage.data.players.forEach(player => {
             players.push({
@@ -449,6 +457,13 @@ function handlePacket(parsedMessage) {
             return;
         } else {
             players = players.filter((player) => player.name !== parsedMessage.data.name);
+            chats.push(
+                {
+                    text: player.name + " left the game",
+                    from: "",
+                    frames: frames
+                }
+            );
         }
     } else if (parsedMessage.type === 'playerPosition') {
         const index = players.findIndex(player => player.name === parsedMessage.data.name);
