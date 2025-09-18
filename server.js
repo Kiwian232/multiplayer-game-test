@@ -65,7 +65,7 @@ wss.on("connection", (ws) => {
 
             const playerNameRegex = /^[a-zA-Z0-9_-]{1,15}$/;
 
-            if (!playerNameRegex.test(playerName)) {
+            if (!playerNameRegex.test(playerName) || playerName === "SERVER") {
                 const errorMessage = {
                     type: "error",
                     data: {
@@ -158,7 +158,7 @@ wss.on("connection", (ws) => {
                 type: "chat",
                 data: {
                     text: `${playerName} joined the game`,
-                    from: ""
+                    from: "SERVER"
                 }
             };
 
@@ -221,7 +221,7 @@ wss.on("connection", (ws) => {
                 type: "chat",
                 data: {
                     text: `${player.name} left the game`,
-                    from: ""
+                    from: "SERVER"
                 }
             };
 

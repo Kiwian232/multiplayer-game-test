@@ -429,9 +429,9 @@ function handlePacket(parsedMessage) {
             return;
         }
         players.push({
-            x: parsedMessage.data.x,
-            y: parsedMessage.data.y,
-            health: parsedMessage.data.health,
+            x: 200,
+            y: 200,
+            health: 100,
             name: parsedMessage.data.name
         })
     } else if (parsedMessage.type === 'existingPlayers') {
