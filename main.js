@@ -300,6 +300,9 @@ document.getElementById('startButton').addEventListener('click', () => {
 
     players[0].name = nameInput;
     connectToServer();
+    connected = true;
+    gameStarted = true;
+    toggleUI("game");
 });
 
 document.getElementById('leaveButton').addEventListener('click', () => {
