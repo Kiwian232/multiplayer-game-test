@@ -164,7 +164,7 @@ wss.on("connection", (ws) => {
 
             wss.clients.forEach((client) => {
                 if (client.readyState === WebSocket.OPEN) {
-                    client.send(playerConnectChatMessage);
+                    client.send(JSON.stringify(playerConnectChatMessage));
                 }
             });
 
@@ -227,7 +227,7 @@ wss.on("connection", (ws) => {
 
             wss.clients.forEach((client) => {
                 if (client.readyState === WebSocket.OPEN) {
-                    client.send(playerDisconnectChatMessage);
+                    client.send(JSON.stringify(playerDisconnectChatMessage));
                 }
             });
 
