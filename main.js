@@ -544,7 +544,7 @@ function getDistance(x1, y1, x2, y2) {
 }
 
 function handleInput() {
-    var realWalkSpeed = 10;
+    var realWalkSpeed = 0.4;
     var walkSpeed = realWalkSpeed * gameScale;
     var lastPosition = {
         x: players[0].x,
