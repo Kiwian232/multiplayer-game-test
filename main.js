@@ -437,9 +437,9 @@ function handlePacket(parsedMessage) {
     } else if (parsedMessage.type === 'existingPlayers') {
         parsedMessage.data.players.forEach(player => {
             players.push({
-                x: 200,
-                y: 200,
-                health: 100,
+                x: player.x,
+                y: player.y,
+                health: player.health,
                 name: player.name
             })
         })
@@ -451,7 +451,6 @@ function handlePacket(parsedMessage) {
             players = players.filter((player) => player.name !== parsedMessage.data.name);
         }
     } else if (parsedMessage.type === 'playerPosition') {
-        console.log("position packjet from " + (players[player => player.name == parsedMessage.data.name]));
         const index = players.findIndex(player => player.name === parsedMessage.data.name);
         if (index === 0 || index === -1) {
             return;
@@ -475,6 +474,8 @@ function handlePacket(parsedMessage) {
             alert('Name is taken or invalid, please chose another.');
             connected = false;
             gameStarted = false;
+            toggleUI("menu");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         } else {
             alert(`Unknown error: ${parsedMessage.data.text}`);
         }
@@ -544,7 +545,7 @@ function getDistance(x1, y1, x2, y2) {
 
 function handleInput() {
     var realWalkSpeed = 10;
-    var walkSpeed = realWalkSpeed / gameScale;
+    var walkSpeed = realWalkSpeed * gameScale;
     var lastPosition = {
         x: players[0].x,
         y: players[0].y
@@ -627,6 +628,16 @@ function renderGame() {
         ctx.fillRect(player.x - (playerSize) - rplayer.x, player.y - (playerSize) - rplayer.y, playerSize, playerSize);
     }
 
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'brown';
+    ctx.beginPath();
+    ctx.moveTo(0 - rplayer.x, 0 - rplayer.y);
+    ctx.lineTo(areaSize - rplayer.x, 0 - rplayer.y);
+    ctx.lineTo(areaSize - rplayer.x, areaSize - rplayer.y);
+    ctx.lineTo(0 - rplayer.x, areaSize - rplayer.y);
+    ctx.lineTo(0 - rplayer.x, 0 - rplayer.y);
+    ctx.stroke();
+
     var treeSize = 10 * gameScale;
     var rockSize = 8 * gameScale;
 
@@ -660,16 +671,6 @@ function renderGame() {
             ctx.fillText(chatLines[i], 10 + ctx.measureText(chats[i].from + "> ").width, (i *13) + 50);
         }
     }
-
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = 'brown';
-    ctx.beginPath();
-    ctx.moveTo(0 - rplayer.x, 0 - rplayer.y);
-    ctx.lineTo(areaSize - rplayer.x, 0 - rplayer.y);
-    ctx.lineTo(areaSize - rplayer.x, areaSize - rplayer.y);
-    ctx.lineTo(0 - rplayer.x, areaSize - rplayer.y);
-    ctx.lineTo(0 - rplayer.x, 0 - rplayer.y);
-    ctx.stroke();
 
     frames++;
 }
